@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema } from "@/lib/form-schema";
 import { useForm } from "react-hook-form";
@@ -15,12 +16,10 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-
-import Link from "next/link";
-import { loginAction } from "@/action/auth-action";
 import toast from "react-hot-toast";
-
-export function LoginForm({ className, ...props }) {
+import Link from "next/link";
+import { registerAction } from "@/action/auth-action";
+export function RegisterForm({ className, ...props }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -28,10 +27,17 @@ export function LoginForm({ className, ...props }) {
       password: "",
     },
   });
+
   async function onSubmit(values) {
-    await loginAction(values);
-    toast.success("Login Sucessfully!");
+    const result = await registerAction(values);
+    console.log("Result of registrer actionL", result);
+    if(result === true){
+      toast.success('Registed')
+    }{
+      toast.success('Register False')
+    }
   }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
@@ -40,7 +46,7 @@ export function LoginForm({ className, ...props }) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Welcome Back</h1>
+                  <h1 className="text-2xl font-bold">Welcome</h1>
                   <p className="text-muted-foreground text-balance">
                     Login to your Acme Inc account
                   </p>
@@ -51,7 +57,7 @@ export function LoginForm({ className, ...props }) {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Username</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input placeholder="s@example.com" {...field} />
                         </FormControl>
@@ -76,6 +82,21 @@ export function LoginForm({ className, ...props }) {
                           </a>
                         </div>
                         <FormControl>
+                          <Input {...field}/>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <FormControl>
                           <Input {...field} />
                         </FormControl>
                         <FormMessage />
@@ -83,6 +104,7 @@ export function LoginForm({ className, ...props }) {
                     )}
                   />
                 </div>
+
                 <Button type="submit" className="w-full">
                   Login
                 </Button>
@@ -121,12 +143,9 @@ export function LoginForm({ className, ...props }) {
                   </Button>
                 </div>
                 <div className="text-center text-sm">
-                  Don&apos;t have an account?{" "}
-                  <Link
-                    href="/register"
-                    className="underline underline-offset-4"
-                  >
-                    Sign up
+                  have an account?{" "}
+                  <Link href={'/login'} className="underline underline-offset-4">
+                    Sign In
                   </Link>
                 </div>
               </div>

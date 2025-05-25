@@ -6,9 +6,7 @@ import { getProductById } from "@/service/product-service";
 
 export default async function ProductContent({ params }) {
   const { id } = params;
-  console.log("ID from params:", id);
   const productById = await getProductById(id);
-  console.log("Product By ID: ", productById);
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumb */}
@@ -16,7 +14,6 @@ export default async function ProductContent({ params }) {
         <span>Account</span> / <span>Gaming</span> /{" "}
         <span className="font-semibold">Havic HV G-92 Gamepad</span>
       </div>
-
       {/* Product Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left Column - Product Image */}

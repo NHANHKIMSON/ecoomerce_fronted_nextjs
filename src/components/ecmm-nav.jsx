@@ -43,20 +43,6 @@ export function Navigation({ session }) {
         .toUpperCase() || ""
     );
   };
-
-  const handleLogout = async () => {
-    try {
-      // This will trigger both NextAuth and Laravel logout
-      await signOut({ 
-        redirect: true,
-        callbackUrl: '/login'
-      });
-    } catch (error) {
-      toast.error('Logout error:', error);
-    }
-    // toast.success('logout successfull!')
-  };
-
   return (
     <header className="border-b">
       <div className="container mx-auto px-4">
@@ -161,12 +147,7 @@ export function Navigation({ session }) {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              // <Button asChild variant="outline" size="sm">
-              //   <Link href="/login">
-              //     <User className="mr-2 h-4 w-4" />
-                  
-              //   </Link>
-              // </Button>
+              // <LogoutButton/>
               ''
             )}
           </div>
