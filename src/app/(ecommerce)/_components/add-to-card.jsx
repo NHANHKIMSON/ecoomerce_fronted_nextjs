@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/popover";
 import { ShoppingCart } from "iconsax-reactjs";
 import Link from "next/link";
-import { CheckoutPage } from "./checkoutPage";
 
 const invoices = [
   {
