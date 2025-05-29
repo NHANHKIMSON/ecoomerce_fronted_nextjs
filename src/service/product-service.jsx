@@ -87,10 +87,19 @@ export async function getProductById(id) {
 }
 
 export async function DeleteProductById(id) {
+  // console.log("Id on Services: ", id);
+  const session = await auth(); 
+  const token = session?.access_token;
   try {
     const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        accept: "Application/json"
+      },
     });
+    const product = await res.json();
+    return product;
   } catch (error) {
     console.log("Delete Product Error Service: " + error);
   }

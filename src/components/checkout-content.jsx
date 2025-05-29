@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
+import { DropdownMenuRadioGroup, RadioGroupItem } from "./ui/dropdown-menu";
 
 export function CheckoutContent() {
   return (
@@ -66,7 +66,7 @@ export function CheckoutContent() {
           {/* Payment Method */}
           <div className="mb-8">
             <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-            <RadioGroup defaultValue="card" className="space-y-4">
+            <DropdownMenuRadioGroup defaultValue="card" className="space-y-4">
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="card" id="card" />
                 <Label htmlFor="card">Credit/Debit Card</Label>
@@ -79,7 +79,7 @@ export function CheckoutContent() {
                 <RadioGroupItem value="bank" id="bank" />
                 <Label htmlFor="bank">Bank Transfer</Label>
               </div>
-            </RadioGroup>
+            </DropdownMenuRadioGroup>
           </div>
 
           {/* Order Notes */}

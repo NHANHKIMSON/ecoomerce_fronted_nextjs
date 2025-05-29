@@ -2,7 +2,6 @@
 import { auth } from "@/auth";
 import { Navigation } from "@/components/ecmm-nav";
 import { Footer } from "@/components/footer";
-import { LogoutButton } from "@/components/logout";
 
 export default async function EcommerceLayout({children}){
     const session = await auth();
@@ -10,7 +9,6 @@ export default async function EcommerceLayout({children}){
         <>
         <Navigation session={session}/>
         {children}
-        <LogoutButton/>
         <Footer/>
         </>
     )

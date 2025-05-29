@@ -4,6 +4,7 @@ import { CreateNewProductCategories, DeleteProductCategoryById } from "@/service
 import { CreateNewProduct, DeleteProductById, UpdateProduct} from "@/service/product-service";
 
 export async function FormDeleteProductAction(formData) {
+  // console.log("Id On Form Delete: ", formData.get("id"))
   const id = formData.get("id");
   if (!id) return;
   await DeleteProductById(id);
